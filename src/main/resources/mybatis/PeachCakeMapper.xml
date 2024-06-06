@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.peachcake.mapper.PeachCakeMapper">
+    <!-- 此处需要注意的是，由于我们数据库定义的id存储类型为intbig,但是我们的Entity中Id是Long -->
+    <!-- 前面的两种方式插入没问题，此处报了数据库类型异常 -->
+    <!-- 所以数据库的ID类型改为了Varchar -->
+    <resultMap id="authorMap" type="com.peachcake.dto.Author">
+        <result column="runoob_title" property="runoobTitle" jdbcType="VARCHAR" />
+        <result column="runoob_author" property="runoobAuthor" jdbcType="VARCHAR" />
+        <result column="submission_date" property="submissionDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="base_column">
+        runoob_title,runoob_author,submission_date
+    </sql>
+
+    <insert id="insertAuthor" parameterType="com.peachcake.dto.Author">
+        INSERT INTO
+        runoob_tbl(
+        <include refid="base_column" />
+        )
+        VALUE
+        (#{runoobTitle},#{runoobAuthor},#{submissionDate})
+    </insert>
+
+    <update id="updateAuthor" parameterType="com.peachcake.dto.Author">
+        UPDATE runoob_tbl
+        <set>
+            <if test="runoobTitle != null">
+                runoob_title = #{runoobTitle},
+            </if>
+            <if test="runoobAuthor != null">
+                runoob_Author = #{runoobAuthor},
+            </if>
+        </set>
+        WHERE runoob_id = #{id}
+    </update>
+
+    <select id="queryById" parameterType="java.lang.String" resultMap="authorMap">
+        SELECT
+        <include refid="base_column"></include>
+        FROM runoob_tbl where runoob_title = #{runoobTitle}
+    </select>
+
+</mapper>
