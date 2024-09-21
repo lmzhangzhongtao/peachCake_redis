@@ -1,4 +1,6 @@
 package com.peachcake.configuration;
+import org.redisson.Redisson;
+import org.redisson.config.Config;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -37,5 +39,12 @@ public class RedisConfig extends CachingConfigurerSupport {
             sb.append(target.getClass().getName()).append(".").append(method.getName()).append(Arrays.toString(objects));
             return sb.toString();
         };
+    }
+
+    @Bean
+    public Redisson redisson(){
+        Config config   = new Config();
+        config.useSingleServer().setAddress("redis://192.168.10.4:6379").setDatabase(0).setPassword("123456");
+        return (Redisson)Redisson.create(config);
     }
 }
