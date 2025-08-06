@@ -4,6 +4,9 @@ import com.peachcake.service.PeachCake;
 import com.peachcake.vo.PeachCakeVO;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PeachCakeImpl implements PeachCake {
     @Override
@@ -17,6 +20,7 @@ public class PeachCakeImpl implements PeachCake {
         vo.setAddress("深圳桂花小学309宿舍");
         vo.setAge("20");
         vo.setName("张仲涛");
+        List<Object> objects = new ArrayList<>();
         return vo;
     }
 }

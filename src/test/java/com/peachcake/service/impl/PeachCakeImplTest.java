@@ -1,32 +1,23 @@
 package com.peachcake.service.impl;
 
 import com.peachcake.vo.PeachCakeVO;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({PeachCakeImpl.class})
 class PeachCakeImplTest {
-
-    private PeachCakeImpl peachCakeImplUnderTest;
-
-    @BeforeEach
-    void setUp() {
-        peachCakeImplUnderTest = new PeachCakeImpl();
-    }
-
-    @Test
-    void testFallInLove() {
-//        assertThat(peachCakeImplUnderTest.fallInLove()).isEqualTo("this is a beautiful day");
-
-    }
+    @InjectMocks
+    PeachCakeImpl peachCake;
 
     @Test
     void testMarried() {
-        // Setup
-        // Run the test
-        final PeachCakeVO result = peachCakeImplUnderTest.married("name");
+        PeachCakeVO pea = peachCake.married("zzt");
+        Assert.assertEquals("张仲涛",pea.getName());
 
-        // Verify the results
     }
 }

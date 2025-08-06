@@ -15,11 +15,11 @@ import java.util.Date;
 public class SpringMainApplicationTests {
 	@Autowired
 	PeachCakeMapper mapper;
-//	@Test
-//	public void queryById() {
-//		Author author= mapper.queryById("学习 PHP");
-//		System.out.println(author.getRunoobAuthor());
-//	}
+	@Test
+	public void queryById() {
+		Author author= mapper.queryById("学习 PHP");
+		System.out.println(author.getRunoobAuthor());
+	}
 
 //	@Test
 //	public void insert(){
